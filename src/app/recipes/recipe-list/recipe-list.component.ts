@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import { Recipe } from "../recipe.model";
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Recipe} from "../recipe.model";
 
 @Component({
   selector: 'app-recipe-list',
@@ -7,6 +7,8 @@ import { Recipe } from "../recipe.model";
   styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent implements OnInit {
+  @Output() recipeWasSelected = new EventEmitter<Recipe>();
+
   recipes: Recipe[] = [
     new Recipe('КРУАССАН классический',
       'Состав:\n' +
@@ -14,7 +16,7 @@ export class RecipeListComponent implements OnInit {
       'Белки – 6,0 г; Жиры – 26,0 г; Углеводы – 41,0 г.\n' +
       '(1460 кДж /350 Ккал)',
       'https://thumb.tildacdn.com/tild3861-3164-4835-b038-313433653537/-/format/webp/IMG_9219.jpg')
-  ,
+    ,
     new Recipe('КРУАССАН с фисташкой и малиной',
       'Состав:\n' +
       'мука пшеничная высшего сорта, яйцо, молоко, вода, масло сливочное 84%, паста фисташковая, ягоды малины быстрозамороженные, сахар, соль морская, дрожжи,ром\n' +
@@ -27,5 +29,9 @@ export class RecipeListComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  onRecipeSelected(recipe: Recipe) {
+    this.recipeWasSelected.emit(recipe);
   }
 }
