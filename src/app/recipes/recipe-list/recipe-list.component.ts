@@ -1,10 +1,12 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Recipe} from "../recipe.model";
+import {LoggingService} from "../../logging.service";
 
 @Component({
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html',
-  styleUrls: ['./recipe-list.component.css']
+  styleUrls: ['./recipe-list.component.css'],
+  providers: [LoggingService]
 })
 export class RecipeListComponent implements OnInit {
   @Output() recipeWasSelected = new EventEmitter<Recipe>();
@@ -25,13 +27,14 @@ export class RecipeListComponent implements OnInit {
       'https://thumb.tildacdn.com/tild3266-3135-4337-b261-653564626130/-/format/webp/IMG_9259.jpg')
   ];
 
-  constructor() {
+  constructor(private loggingService: LoggingService) {
   }
 
   ngOnInit() {
   }
 
   onRecipeSelected(recipe: Recipe) {
+    this.loggingService.logIt(recipe.name);
     this.recipeWasSelected.emit(recipe);
   }
 }
