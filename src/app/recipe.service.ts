@@ -8,7 +8,7 @@ export class RecipeService {
   recipeSelected = new EventEmitter<Recipe>();
 
   private recipes: Recipe[] = [
-    new Recipe('КРУАССАН классический',
+    new Recipe(1,'КРУАССАН классический',
       'Состав:\n' +
       'мука пшеничная высшего сорта, яйцо, молоко, вода, масло сливочное 84%, сахар, соль морская, дрожжи\n' +
       'Белки – 6,0 г; Жиры – 26,0 г; Углеводы – 41,0 г.\n' +
@@ -16,7 +16,7 @@ export class RecipeService {
       'https://thumb.tildacdn.com/tild3861-3164-4835-b038-313433653537/-/format/webp/IMG_9219.jpg',
       [new Ingredient('Flowers', 1), new Ingredient('Butter', 1)])
     ,
-    new Recipe('КРУАССАН с фисташкой и малиной',
+    new Recipe(2,'КРУАССАН с фисташкой и малиной',
       'Состав:\n' +
       'мука пшеничная высшего сорта, яйцо, молоко, вода, масло сливочное 84%, паста фисташковая, ягоды малины быстрозамороженные, сахар, соль морская, дрожжи,ром\n' +
       'Белки – 4,5 г; Жиры – 16,0 г; Углеводы – 12,0 г.\n' +
@@ -39,5 +39,14 @@ export class RecipeService {
 
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
     this.shoppingListService.addIngredients(ingredients);
+  }
+
+  getRecipe(id: number) {
+    const server = this.recipes.find(
+      (s) => {
+        return s.id === id;
+      }
+    );
+    return server;
   }
 }
