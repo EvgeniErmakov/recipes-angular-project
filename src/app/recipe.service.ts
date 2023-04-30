@@ -42,11 +42,11 @@ export class RecipeService {
   }
 
   getRecipe(id: number) {
-    const server = this.recipes.find(
+    const recipe = this.recipes.find(
       (s) => {
         return s.id === id;
       }
     );
-    return server;
+    return recipe;
   }
 }

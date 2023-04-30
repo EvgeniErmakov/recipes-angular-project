@@ -8,7 +8,7 @@ import {RecipeResolver} from "./recipes/recipe-details/recipe-resolver.service";
 const appRoutes: Routes = [
   {path: '', redirectTo: '/recipes', pathMatch: 'full'},
   {path: 'recipes', component: RecipesComponent
-    , children: [{path: ':id', component: RecipesComponent, resolve: {recipe: RecipeResolver}}]
+    , children: [{path: ':id', component: RecipeDetailsComponent, resolve: {recipe: RecipeResolver}}]
   },
   {path: 'shopping', component: ShoppingListComponent}
 ]
