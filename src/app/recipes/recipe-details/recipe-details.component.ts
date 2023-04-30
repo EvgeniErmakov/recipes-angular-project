@@ -28,4 +28,8 @@ export class RecipeDetailsComponent implements OnInit {
         }
       );
   }
+
+  onEdit() {
+    this.router.navigate(['edit'], {relativeTo: this.route})
+  }
 }
