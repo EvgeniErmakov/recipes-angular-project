@@ -65,4 +65,13 @@ export class RecipeService {
       }
     }
   }
+
+  deleteRecipe(index: number) {
+    for (var i = 0; i < this.recipes.length; i++) {
+      if (this.recipes[i].id === index) {
+        this.recipes.splice(i, 1);
+        this.recipesChanged.next(this.recipes.slice());
+      }
+    }
+  }
 }
