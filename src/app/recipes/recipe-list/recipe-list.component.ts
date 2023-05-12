@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Recipe} from "../recipe.model";
 import {LoggingService} from "../../logging.service";
 import {RecipeService} from "../../recipe.service";
@@ -16,6 +16,11 @@ export class RecipeListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.recipeService.recipesChanged.subscribe((recipes: Recipe[]) => {
+      this.recipes = recipes;
+      for(var i = 0; i < recipes.length; i++){
+      }
+    });
     this.recipes = this.recipeService.getRecipes();
   }
 }

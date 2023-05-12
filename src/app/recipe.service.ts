@@ -2,12 +2,14 @@ import {Recipe} from "./recipes/recipe.model";
 import {Injectable} from "@angular/core";
 import {Ingredient} from "./shared/ingredient.model";
 import {ShoppingListService} from "./shopping-list.service";
+import {Subject} from "rxjs";
 
 @Injectable()
 export class RecipeService {
+  recipesChanged = new Subject<Recipe[]>();
 
   private recipes: Recipe[] = [
-    new Recipe(1,'КРУАССАН классический',
+    new Recipe(1, 'КРУАССАН классический',
       'Состав:\n' +
       'мука пшеничная высшего сорта, яйцо, молоко, вода, масло сливочное 84%, сахар, соль морская, дрожжи\n' +
       'Белки – 6,0 г; Жиры – 26,0 г; Углеводы – 41,0 г.\n' +
@@ -15,7 +17,7 @@ export class RecipeService {
       'https://thumb.tildacdn.com/tild3861-3164-4835-b038-313433653537/-/format/webp/IMG_9219.jpg',
       [new Ingredient('Flowers', 1), new Ingredient('Butter', 1)])
     ,
-    new Recipe(2,'КРУАССАН с фисташкой и малиной',
+    new Recipe(2, 'КРУАССАН с фисташкой и малиной',
       'Состав:\n' +
       'мука пшеничная высшего сорта, яйцо, молоко, вода, масло сливочное 84%, паста фисташковая, ягоды малины быстрозамороженные, сахар, соль морская, дрожжи,ром\n' +
       'Белки – 4,5 г; Жиры – 16,0 г; Углеводы – 12,0 г.\n' +
@@ -47,5 +49,20 @@ export class RecipeService {
       }
     );
     return recipe;
+  }
+
+  addRecipe(recipe: Recipe) {
+    recipe.id = this.recipes.length + 1;
+    this.recipes.push(recipe);
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  updateRecipe(index: number, newRecipe: Recipe) {
+    for (var i = 0; i < this.recipes.length; i++) {
+      if (this.recipes[i].id === index) {
+        this.recipes[i] = newRecipe;
+        this.recipesChanged.next(this.recipes.slice());
+      }
+    }
   }
 }
