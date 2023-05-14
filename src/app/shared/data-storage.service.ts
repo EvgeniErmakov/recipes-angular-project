@@ -20,9 +20,15 @@ export class DataStorageService implements OnInit {
 
   storeRecipes() {
     const recipes = this.recipeService.getRecipes();
-    return this.http.put(this.databaseUrl, recipes).subscribe(response => {
-      console.log(response)
-    });
+    return this.http.put(this.databaseUrl, recipes)
+      .subscribe(response => {console.log(response)});
+  }
+
+  fetchRecipes() {
+    this.http.get<Recipe[]>(this.databaseUrl)
+      .subscribe(recipes => {
+      this.recipeService.setRecipes(recipes);
+    })
   }
 
   updateRecipe(recipe: Recipe) {

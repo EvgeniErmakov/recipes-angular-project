@@ -14,4 +14,8 @@ constructor(private database: DataStorageService) {
   saveRecipes() {
     this.database.storeRecipes();
   }
+
+  onFetchData() {
+    this.database.fetchRecipes();
+  }
 }
