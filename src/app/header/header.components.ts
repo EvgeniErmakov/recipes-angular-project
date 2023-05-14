@@ -16,6 +16,7 @@ constructor(private database: DataStorageService) {
   }
 
   onFetchData() {
-    this.database.fetchRecipes();
+    this.database.fetchRecipes()
+      .subscribe();
   }
 }
