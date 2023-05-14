@@ -17,6 +17,7 @@ import {RecipeResolver} from "./recipes/recipe-details/recipe-resolver.service";
 import {RecipeService} from "./recipe.service";
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import {HttpClientModule} from "@angular/common/http";
+import {DataStorageService} from "./shared/data-storage.service";
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {HttpClientModule} from "@angular/common/http";
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    HttpClientModule,
     ReactiveFormsModule
   ],
   providers: [ShoppingListService, RecipeResolver, RecipeService],
